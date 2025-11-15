@@ -1,0 +1,176 @@
+#!/bin/bash
+
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ---------- Config ----------
+JAR=${JAR:-}
+EXTRA_JAVA_OPTS=${JAVA_OPTS:-"-Xms4g -Xmx8g"}
+IN=${IN:-rules.ttl}
+OUT_NAME=${OUT_NAME:-0GOOR_HG002_out.ttl}
+OUT_DIR=${OUT_DIR:-run-output}
+OUT="$OUT_DIR/$OUT_NAME"
+SER=${SER:-turtle}
+VERBOSE_FLAG=${VERBOSE_FLAG:--v}
+LOGDIR=${LOGDIR:-run_metrics}
+mkdir -p "$LOGDIR" "$OUT_DIR"
+
+RUN_ID=$(date +%Y%m%dT%H%M%S)
+TIMESTAMP=$(date +"%Y-%m-%dT%H:%M:%S")
+TIME_LOG="$LOGDIR/time-$RUN_ID.txt"
+METRICS_JSON="$LOGDIR/metrics-$RUN_ID.json"
+METRICS_CSV="$LOGDIR/metrics.csv"
+
+# ---------- Helpers ----------
+# Locate JAR if not set
+if [[ -z "${JAR:-}" ]]; then
+  shopt -s nullglob
+  candidates=(target/rmlmapper-8.0.0-r*-all.jar)
+  shopt -u nullglob
+
+  if (( ${#candidates[@]} == 0 )); then
+    echo "Error: No JAR found matching target/rmlmapper-8.0.0-r*-all.jar"
+    echo "Hint: build the project first, or set JAR explicitly, e.g.:"
+    echo "  JAR=target/rmlmapper-8.0.0-r381-all.jar ./run_rmlmapper_metrics.sh"
+    exit 1
+  elif (( ${#candidates[@]} == 1 )); then
+    JAR="${candidates[0]}"
+  else
+    # Pick the highest rNNN number
+    best=""
+    bestn=-1
+    for f in "${candidates[@]}"; do
+      if [[ "$f" =~ r([0-9]+)-all\.jar$ ]]; then
+        n="${BASH_REMATCH[1]}"
+        if (( n > bestn )); then
+          bestn="$n"
+          best="$f"
+        fi
+      fi
+    done
+    if [[ -z "$best" ]]; then
+      # Fallback: newest by mtime if regex somehow didn't match
+      # (shouldn't happen, but better safe than sorry)
+      best=$(ls -1t target/rmlmapper-8.0.0-r*-all.jar | head -n1)
+    fi
+    JAR="$best"
+  fi
+fi
+echo "Using JAR: $JAR"
+
+stat_size() {
+  local f="$1"
+  if [[ -f "$f" ]]; then
+    if stat -c%s "$f" >/dev/null 2>&1; then stat -c%s "$f"
+    elif stat -f%z "$f" >/dev/null 2>&1; then stat -f%z "$f"
+    else wc -c <"$f" | tr -d ' '
+    fi
+  else
+    echo 0
+  fi
+}
+
+have_gnu_time() { [[ -x /usr/bin/time ]] && /usr/bin/time --version >/dev/null 2>&1; }
+
+# Count triples in a Turtle file using available tooling:
+# 1) Apache Jena: riot --formatted=NTRIPLES file.ttl | wc -l
+# 2) Raptor:      rapper -i turtle -o ntriples file.ttl | wc -l
+# 3) rdflib:      rdfpipe -i turtle -o nt file.ttl | wc -l
+# 4) Fallback heuristic: count lines that end with '.' (imperfect but works for many TTLs)
+count_triples_ttl() {
+  local f="$1"
+if [[ ! -f "$f" ]]; then echo 0; return; fi
+  # Heuristic fallback: count ttl statements ending with '.' ignoring prefixes and comments
+  # Note: this is not fully spec-compliant; prefer one of the tools above for accuracy.
+  grep -E '^\s*[^#].*\.\s*$' "$f" | wc -l | tr -d ' '
+}
+
+elapsed_to_seconds() {
+  awk -F':' '{
+    if (NF==3) { h=$1+0; m=$2+0; s=$3+0; printf("%.3f", h*3600 + m*60 + s) }
+    else if (NF==2) { m=$1+0; s=$2+0; printf("%.3f", m*60 + s) }
+    else { s=$1+0; printf("%.3f", s) }
+  }'
+}
+
+JAVA_VERSION=$(java -version 2>&1 | head -n1 | sed 's/"/\\"/g')
+
+# Minimal GC logging off by default to keep things simple; uncomment if you want it.
+# GC_OPTS="-Xlog:gc*:file=$LOGDIR/gc-$RUN_ID.log:time,uptime,level,tags" # Java 9+
+# or for Java 8: GC_OPTS="-Xloggc:$LOGDIR/gc-$RUN_ID.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps"
+GC_OPTS=${GC_OPTS:-}
+
+JAVA_CMD=(java "$EXTRA_JAVA_OPTS" -jar "$JAR" -m "$IN" -o "$OUT" -s "$SER" "$VERBOSE_FLAG")
+
+# ---------- Pre-run ----------
+IN_SIZE=$(stat_size "$IN")
+OUT_SIZE_BEFORE=$(stat_size "$OUT") # may be 0 if not existing
+
+# ---------- Run with timing ----------
+EXIT_CODE=0
+if have_gnu_time; then
+  /usr/bin/time -v -o "$TIME_LOG" -- "${JAVA_CMD[@]}" || EXIT_CODE=$?
+else
+  { time -p "${JAVA_CMD[@]}"; } >"$TIME_LOG" 2>&1 || EXIT_CODE=$?
+fi
+
+# ---------- Post-run ----------
+OUT_SIZE=$(stat_size "$OUT")
+TRIPLES=$(count_triples_ttl "$OUT")
+
+# Parse timing
+WALL_SEC=""
+USER_SEC=""
+SYS_SEC=""
+MAX_RSS_KB=""
+
+if have_gnu_time; then
+  ELAPSED=$(awk -F': ' '/Elapsed \(wall clock\) time/ {print $2}' "$TIME_LOG")
+  WALL_SEC=$(printf "%s" "$ELAPSED" | elapsed_to_seconds)
+
+  USER_SEC=$(awk -F': ' '/User time \(seconds\)/ {print $2}' "$TIME_LOG")
+  SYS_SEC=$(awk -F': '  '/System time \(seconds\)/ {print $2}' "$TIME_LOG")
+  MAX_RSS_KB=$(awk -F': ' '/Maximum resident set size/ {print $2}' "$TIME_LOG")
+else
+  WALL_SEC=$(awk '/^real/ {print $2}' "$TIME_LOG")   # already a float
+  USER_SEC=$(awk '/^user/ {print $2}' "$TIME_LOG")
+  SYS_SEC=$(awk  '/^sys/  {print $2}' "$TIME_LOG")
+fi
+
+# ---------- Save JSON ----------
+cat > "$METRICS_JSON" <<EOF
+{
+  "run_id": "$RUN_ID",
+  "timestamp": "$TIMESTAMP",
+  "command": "$(printf '%q ' "${JAVA_CMD[@]}")",
+  "exit_code": $EXIT_CODE,
+  "timing": {
+    "wall_seconds": ${WALL_SEC:-null},
+    "user_seconds": ${USER_SEC:-null},
+    "sys_seconds": ${SYS_SEC:-null},
+    "max_rss_kb": ${MAX_RSS_KB:-null}
+  },
+  "artifacts": {
+    "jar": "$JAR",
+    "input_path": "$IN",
+    "input_size_bytes": $IN_SIZE,
+    "output_path": "$OUT",
+    "output_size_bytes": $OUT_SIZE,
+    "output_triples": $TRIPLES
+  },
+  "java": {
+    "version_header": "$JAVA_VERSION"
+  }
+}
+EOF
+
+# ---------- Save/append CSV ----------
+# Header if file doesn't exist
+if [[ ! -f "$METRICS_CSV" ]]; then
+  echo "run_id,timestamp,exit_code,wall_seconds,user_seconds,sys_seconds,max_rss_kb,input_size_bytes,output_size_bytes,output_triples,jar,input,output" > "$METRICS_CSV"
+fi
+echo "$RUN_ID,$TIMESTAMP,$EXIT_CODE,${WALL_SEC:-},${USER_SEC:-},${SYS_SEC:-},${MAX_RSS_KB:-},$IN_SIZE,$OUT_SIZE,$TRIPLES,$JAR,$IN,$OUT" >> "$METRICS_CSV"
+
+echo "Done."
+echo "JSON: $METRICS_JSON"
+echo "CSV:  $METRICS_CSV"

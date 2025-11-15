@@ -11,3 +11,8 @@ kafka_2*/
 !*_example.properties
 !docker/configuration.properties
 scripts/node_modules
+
+run-output/
+run_metrics/
+*.vcf
+*.tsv
