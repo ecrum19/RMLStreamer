@@ -5,16 +5,9 @@ set -euo pipefail
 
 # ---------- Config ----------
 JAR=${JAR:-}
-<<<<<<< HEAD
 IN=${IN:-rules.ttl}
 OUT_NAME=${OUT_NAME:-0GOOR_HG002_out}
 OUT_DIR=${OUT_DIR:-run_output}
-=======
-EXTRA_JAVA_OPTS=${JAVA_OPTS:-"-Xms4g -Xmx8g"}
-IN=${IN:-rules.ttl}
-OUT_NAME=${OUT_NAME:-0GOOR_HG002_out.ttl}
-OUT_DIR=${OUT_DIR:-run-output}
->>>>>>> 1bf1312598f75548225596963db0c71dba976fce
 OUT="$OUT_DIR/$OUT_NAME"
 SER=${SER:-turtle}
 VERBOSE_FLAG=${VERBOSE_FLAG:--v}
@@ -29,7 +22,6 @@ METRICS_CSV="$LOGDIR/metrics.csv"
 
 # ---------- Helpers ----------
 # Locate JAR if not set
-<<<<<<< HEAD
 # if [[ -z "${JAR:-}" ]]; then
 #   shopt -s nullglob
 #   candidates=(target/rmlmapper-8.0.0-r*-all.jar)
@@ -64,42 +56,6 @@ METRICS_CSV="$LOGDIR/metrics.csv"
 #   fi
 # fi
 # echo "Using JAR: $JAR"
-=======
-if [[ -z "${JAR:-}" ]]; then
-  shopt -s nullglob
-  candidates=(target/rmlmapper-8.0.0-r*-all.jar)
-  shopt -u nullglob
-
-  if (( ${#candidates[@]} == 0 )); then
-    echo "Error: No JAR found matching target/rmlmapper-8.0.0-r*-all.jar"
-    echo "Hint: build the project first, or set JAR explicitly, e.g.:"
-    echo "  JAR=target/rmlmapper-8.0.0-r381-all.jar ./run_rmlmapper_metrics.sh"
-    exit 1
-  elif (( ${#candidates[@]} == 1 )); then
-    JAR="${candidates[0]}"
-  else
-    # Pick the highest rNNN number
-    best=""
-    bestn=-1
-    for f in "${candidates[@]}"; do
-      if [[ "$f" =~ r([0-9]+)-all\.jar$ ]]; then
-        n="${BASH_REMATCH[1]}"
-        if (( n > bestn )); then
-          bestn="$n"
-          best="$f"
-        fi
-      fi
-    done
-    if [[ -z "$best" ]]; then
-      # Fallback: newest by mtime if regex somehow didn't match
-      # (shouldn't happen, but better safe than sorry)
-      best=$(ls -1t target/rmlmapper-8.0.0-r*-all.jar | head -n1)
-    fi
-    JAR="$best"
-  fi
-fi
-echo "Using JAR: $JAR"
->>>>>>> 1bf1312598f75548225596963db0c71dba976fce
 
 stat_size() {
   local f="$1"
@@ -115,7 +71,6 @@ stat_size() {
 
 have_gnu_time() { [[ -x /usr/bin/time ]] && /usr/bin/time --version >/dev/null 2>&1; }
 
-<<<<<<< HEAD
 # Count triples via the number of lines in produced output dir:
 count_triples_ttl() {
   local path="$1"
@@ -162,21 +117,6 @@ count_triples_ttl() {
 }
 
 
-=======
-# Count triples in a Turtle file using available tooling:
-# 1) Apache Jena: riot --formatted=NTRIPLES file.ttl | wc -l
-# 2) Raptor:      rapper -i turtle -o ntriples file.ttl | wc -l
-# 3) rdflib:      rdfpipe -i turtle -o nt file.ttl | wc -l
-# 4) Fallback heuristic: count lines that end with '.' (imperfect but works for many TTLs)
-count_triples_ttl() {
-  local f="$1"
-if [[ ! -f "$f" ]]; then echo 0; return; fi
-  # Heuristic fallback: count ttl statements ending with '.' ignoring prefixes and comments
-  # Note: this is not fully spec-compliant; prefer one of the tools above for accuracy.
-  grep -E '^\s*[^#].*\.\s*$' "$f" | wc -l | tr -d ' '
-}
-
->>>>>>> 1bf1312598f75548225596963db0c71dba976fce
 elapsed_to_seconds() {
   awk -F':' '{
     if (NF==3) { h=$1+0; m=$2+0; s=$3+0; printf("%.3f", h*3600 + m*60 + s) }
@@ -192,19 +132,11 @@ JAVA_VERSION=$(java -version 2>&1 | head -n1 | sed 's/"/\\"/g')
 # or for Java 8: GC_OPTS="-Xloggc:$LOGDIR/gc-$RUN_ID.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps"
 GC_OPTS=${GC_OPTS:-}
 
-<<<<<<< HEAD
 JAVA_CMD=(java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m "$IN" -o "$OUT_DIR/$OUT_NAME")
 
 # ---------- Pre-run ----------
 IN_SIZE=$(stat_size "$IN")
 OUT_SIZE_BEFORE=$(stat_size "$OUT_DIR/$OUT_NAME") # may be 0 if not existing
-=======
-JAVA_CMD=(java "$EXTRA_JAVA_OPTS" -jar "$JAR" -m "$IN" -o "$OUT" -s "$SER" "$VERBOSE_FLAG")
-
-# ---------- Pre-run ----------
-IN_SIZE=$(stat_size "$IN")
-OUT_SIZE_BEFORE=$(stat_size "$OUT") # may be 0 if not existing
->>>>>>> 1bf1312598f75548225596963db0c71dba976fce
 
 # ---------- Run with timing ----------
 EXIT_CODE=0
