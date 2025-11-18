@@ -18,7 +18,7 @@ rr:TriplesMap a rr:TriplesMap ;
   rml:logicalSource [
     rml:source [
       a csvw:Table;
-      csvw:url "0GOOR_HG002.tsv";
+      csvw:url "vcf_files/60820188475559.filtered.snp.tsv";
       csvw:dialect [
         a csvw:Dialect;
         csvw:delimiter "\t"

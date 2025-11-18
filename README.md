@@ -7,6 +7,24 @@ using [RML](http://rml.io/). The difference with other RML implementations is th
 
 Documentation regarding the use of (custom) functions can be found [here](documentation/README_Functions.md).
 
+
+### VCF Commands to Execute
+Generate a jar file:
+```
+mvn -DskipTests clean package
+```
+
+Generate a genomic data tsv:
+```
+bash vcf_as_tsv filename.vcf
+```
+
+Run VCF Conversion:
+```
+bash run_test.sh
+```
+
+
 ### Quick start (standalone)
 
 * Download `RMLStreamer-<version>-standalone.jar` from the [latest release](https://github.com/RMLio/RMLStreamer/releases/latest).
