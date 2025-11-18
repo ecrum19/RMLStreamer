@@ -28,9 +28,13 @@ fi
 outfile="${base}.tsv"
 
 # Process: skip metadata, find #CHROM line, strip '#', and output first 100 variants
-$reader "$infile" | awk '
-  BEGIN { started=0; n=0 }
-  /^#CHROM(\t| )/ { sub(/^#/, ""); print; started=1; next }   # remove leading # on header
+"${reader_cmd[@]}" "$infile" | awk '
+  BEGIN { n=0 }
+  /^#CHROM(\t| )/ {
+    sub(/^#/, "", $1);  # remove leading # from first field
+    print;
+    next
+  }
   /^[^#]/ { print }                                # print all variant rows
 ' > "$outfile"
 
