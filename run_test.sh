@@ -11,7 +11,6 @@ OUT_NAME=${OUT_NAME:-0GOOR_HG002_out}
 OUT_DIR=${OUT_DIR:-run_output}
 OUT="$OUT_DIR/$OUT_NAME"
 SER=${SER:-turtle}
-VERBOSE_FLAG=${VERBOSE_FLAG:--v}
 LOGDIR=${LOGDIR:-run_metrics}
 mkdir -p "$LOGDIR" "$OUT_DIR"
 
@@ -139,7 +138,7 @@ JAVA_CMD=(java -jar "$JAR" toFile -m "$IN" -o "$OUT_DIR/$OUT_NAME")
 
 # ---------- Pre-run ----------
 IN_SIZE=$(stat_size "$IN")
-VCF_SIZE=$(stat_size "$IN")
+VCF_SIZE=$(stat_size "$IN_VCF")
 
 # ---------- Run with timing ----------
 EXIT_CODE=0
