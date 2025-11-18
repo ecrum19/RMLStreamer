@@ -14,6 +14,7 @@ scripts/node_modules
 
 run_output/
 run_metrics/
+vcf_files/
 *.vcf
 *.tsv
 RMLStreamer-v2.5.0-standalone.jar
