@@ -13,13 +13,16 @@ if [ ! -f "$infile" ]; then
   exit 1
 fi
 
-# Determine decompression method
-if [[ "$infile" == *.gz ]]; then
-  reader="zcat"
+# Determine decompression method and base name
+if [[ "$infile" == *.vcf.gz ]]; then
+  reader_cmd=(gzip -dc)
   base="$(basename "$infile" .vcf.gz)"
-else
-  reader="cat"
+elif [[ "$infile" == *.vcf ]]; then
+  reader_cmd=(cat)
   base="$(basename "$infile" .vcf)"
+else
+  echo "Error: input must end in .vcf or .vcf.gz"
+  exit 1
 fi
 
 outfile="${base}.tsv"
