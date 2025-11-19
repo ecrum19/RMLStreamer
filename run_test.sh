@@ -6,7 +6,7 @@ set -euo pipefail
 # ---------- Config ----------
 JAR=${JAR:-RMLStreamer-v2.5.0-standalone.jar}
 IN=${IN:-rules.ttl}
-IN_VCF=${IN_VCF:-vcf_files/60820188475559.filtered.snp.vcf.gz}
+IN_VCF=${IN_VCF:-vcf_files/bsr6402.combined.vcf.gz}
 OUT_NAME=${OUT_NAME:-60820188475559_out}
 OUT_DIR=${OUT_DIR:-run_output}
 OUT="$OUT_DIR/$OUT_NAME"
