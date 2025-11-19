@@ -1,2 +1,0 @@
-run_id,timestamp,exit_code,wall_seconds,user_seconds,sys_seconds,max_rss_kb,input_size_bytes,output_size_bytes,output_triples,jar,input,output
-20251115T125047,2025-11-15T12:50:47,1,0.11,0.12,0.02,,2163,0,0,target/RMLStreamer-v2.5.1-SNAPSHOT.jar,rules.ttl,run-output/0GOOR_HG002_out.ttl
