@@ -18,7 +18,7 @@ rr:TriplesMap a rr:TriplesMap ;
   rml:logicalSource [
     rml:source [
       a csvw:Table;
-      csvw:url "60820188475559.filtered.snp.tsv";
+      csvw:url "bsr6402.combined.tsv";
       csvw:dialect [
         a csvw:Dialect;
         csvw:delimiter "\t";
