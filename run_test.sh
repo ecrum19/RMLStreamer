@@ -6,8 +6,8 @@ set -euo pipefail
 # ---------- Config ----------
 JAR=${JAR:-RMLStreamer-v2.5.0-standalone.jar}
 IN=${IN:-rules.ttl}
-IN_VCF=${IN_VCF:-vcf_files/PG0001202-BLD.Genotyping.vcf}
-OUT_NAME=${OUT_NAME:-60820188475559_out}
+IN_VCF=${IN_VCF:-vcf_files/0GOOR_HG002.vcf}
+OUT_NAME=${OUT_NAME:-0GOOR_HG002_out}
 OUT_DIR=${OUT_DIR:-run_output}
 OUT="$OUT_DIR/$OUT_NAME"
 LOGDIR=${LOGDIR:-run_metrics}
