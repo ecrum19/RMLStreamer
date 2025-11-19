@@ -21,7 +21,8 @@ rr:TriplesMap a rr:TriplesMap ;
       csvw:url "60820188475559.filtered.snp.tsv";
       csvw:dialect [
         a csvw:Dialect;
-        csvw:delimiter "\t"
+        csvw:delimiter "\t";
+        csvw:headerRowCount 1
       ]
     ];
     rml:referenceFormulation ql:CSV
