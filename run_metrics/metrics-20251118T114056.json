@@ -1,0 +1,32 @@
+{
+  "run_id": "20251118T114056",
+  "timestamp": "2025-11-18T11:40:56",
+  "command": "java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m rules.ttl -o run_output/60820188475559_out ",
+  "exit_code": 130,
+  "timing": {
+    "wall_seconds": 8.570,
+    "user_seconds": 17.42,
+    "sys_seconds": 2.35,
+    "max_rss_kb": 515968
+  },
+  "artifacts": {
+    "jar": "RMLStreamer-v2.5.0-standalone.jar",
+    "input_path": "rules.ttl",
+    "input_size_bytes": 2285,
+    "input_vcf_size_bytes": 340949186,
+    "output_path": "run_output/60820188475559_out",
+    "output_size_bytes": 0,
+    "output_triples": {
+  "run_output/60820188475559_out/1": 0,
+  "run_output/60820188475559_out/2": 0,
+  "run_output/60820188475559_out/3": 0,
+  "run_output/60820188475559_out/4": 0,
+  "run_output/60820188475559_out/5": 0,
+  "run_output/60820188475559_out/6": 0,
+  "TOTAL": 0
+}
+  },
+  "java": {
+    "version_header": "openjdk version \"21.0.8\" 2025-07-15"
+  }
+}
