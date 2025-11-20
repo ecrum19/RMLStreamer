@@ -9,12 +9,25 @@ Documentation regarding the use of (custom) functions can be found [here](docume
 
 
 ### VCF Commands to Execute
-Generate a jar file:
+Download the RMLStreamer STANDALONE jar file:
 ```
-mvn -DskipTests clean package
+wget --content-disposition --trust-server-names \
+  https://github.com/RMLio/RMLStreamer/releases/download/v2.5.0/RMLStreamer-v2.5.0-standalone.jar
+
 ```
 
-Generate a genomic data tsv:
+Install HDT library:
+```
+git clone git@github.com:rdfhdt/hdt-java.git
+cd hdt-java
+
+sudo apt install openjdk-11-jdk
+sudo update-alternatives --config java  # and choose jdk-11 as default 
+
+mvn clean install -DskipTests
+```
+
+Generate tsv representations of vcf files:
 ```
 bash vcf_as_tsv filename.vcf
 ```

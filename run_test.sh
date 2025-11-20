@@ -19,42 +19,6 @@ TIME_LOG="$LOGDIR/time-$RUN_ID.txt"
 METRICS_JSON="$LOGDIR/metrics-$RUN_ID.json"
 METRICS_CSV="$LOGDIR/metrics.csv"
 
-# ---------- Helpers ----------
-# Locate JAR if not set
-# if [[ -z "${JAR:-}" ]]; then
-#   shopt -s nullglob
-#   candidates=(target/rmlmapper-8.0.0-r*-all.jar)
-#   shopt -u nullglob
-
-#   if (( ${#candidates[@]} == 0 )); then
-#     echo "Error: No JAR found matching target/rmlmapper-8.0.0-r*-all.jar"
-#     echo "Hint: build the project first, or set JAR explicitly, e.g.:"
-#     echo "  JAR=target/rmlmapper-8.0.0-r381-all.jar ./run_rmlmapper_metrics.sh"
-#     exit 1
-#   elif (( ${#candidates[@]} == 1 )); then
-#     JAR="${candidates[0]}"
-#   else
-#     # Pick the highest rNNN number
-#     best=""
-#     bestn=-1
-#     for f in "${candidates[@]}"; do
-#       if [[ "$f" =~ r([0-9]+)-all\.jar$ ]]; then
-#         n="${BASH_REMATCH[1]}"
-#         if (( n > bestn )); then
-#           bestn="$n"
-#           best="$f"
-#         fi
-#       fi
-#     done
-#     if [[ -z "$best" ]]; then
-#       # Fallback: newest by mtime if regex somehow didn't match
-#       # (shouldn't happen, but better safe than sorry)
-#       best=$(ls -1t target/rmlmapper-8.0.0-r*-all.jar | head -n1)
-#     fi
-#     JAR="$best"
-#   fi
-# fi
-# echo "Using JAR: $JAR"
 
 stat_size() {
   local path="$1"
