@@ -14,9 +14,6 @@ OUT_ROOT_DIR=${OUT_ROOT_DIR:-run_output}
 # Metrics directory
 LOGDIR=${LOGDIR:-run_metrics}
 
-# Script that updates rules.ttl with the current TSV filename
-# It will be called as:  update_rules.sh <tsv_path> <rules_file>
-UPDATE_RULES_SCRIPT=${UPDATE_RULES_SCRIPT:-bash update_rules.sh}
 
 # rdf2hdt binary
 HDT=${RDF2HDT:-bin/rdf2hdt.sh}
@@ -120,6 +117,9 @@ fi
 # ---------- Main loop over TSV files ----------
 for TSV_FILE in "${FILES[@]}"; do
   FULL_TSV="$TSV_FILE"
+  
+  # Script that updates rules.ttl with the current TSV filename
+  UPDATE_RULES_SCRIPT=${UPDATE_RULES_SCRIPT:-./update_rules.sh $FULL_TSV}
 
   if [[ ! -f "$FULL_TSV" ]]; then
     echo "WARNING: TSV file '$FULL_TSV' not found, skipping." >&2
@@ -138,7 +138,7 @@ for TSV_FILE in "${FILES[@]}"; do
   # Call external script to update rules.ttl with the current file name
   if [[ -x "$UPDATE_RULES_SCRIPT" ]]; then
     echo "Updating mapping '$IN' using '$UPDATE_RULES_SCRIPT' for '$FULL_TSV'..."
-    "$UPDATE_RULES_SCRIPT" "$FULL_TSV"
+    "$UPDATE_RULES_SCRIPT"
   else
     echo "WARNING: update script '$UPDATE_RULES_SCRIPT' is not executable; using existing '$IN' as-is." >&2
   fi
@@ -167,7 +167,7 @@ for TSV_FILE in "${FILES[@]}"; do
 
   for NO_EXT_FILE in "$OUT"/*; do
     if [[ -f "$NO_EXT_FILE" ]]; then
-      mv "${OUT}/${NO_EXT_FILE}" "${OUT}/${NO_EXT_FILE}.nq"
+      mv "$NO_EXT_FILE" "${NO_EXT_FILE}.nq"
     fi
   done
 

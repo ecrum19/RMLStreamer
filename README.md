@@ -32,9 +32,14 @@ mvn clean install -DskipTests
 
 Generate tsv representations of vcf files:
 ```
-bash vcf_as_tsv filename.vcf
+bash vcf_as_tsv.sh filename.vcf
 ```
 
+Make support scripts executable:
+```
+chmod +x vcf_as_tsv.sh
+chmod +x yourscript.sh
+```
 Run VCF Conversion:
 ```
 bash run_test.sh
