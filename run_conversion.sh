@@ -6,7 +6,7 @@ JAR=${JAR:-RMLStreamer-v2.5.0-standalone.jar}
 IN=${IN:-rules.ttl}
 
 # Directory where your TSV input files live
-DATA_DIR=${DATA_DIR:-tsv_files}
+DATA_DIR=${DATA_DIR:-}
 
 # Root output directory; each file gets its own subdir
 OUT_ROOT_DIR=${OUT_ROOT_DIR:-run_output}
@@ -119,7 +119,7 @@ fi
 
 # ---------- Main loop over TSV files ----------
 for TSV_FILE in "${FILES[@]}"; do
-  FULL_TSV="$DATA_DIR/$TSV_FILE"
+  FULL_TSV="$TSV_FILE"
 
   if [[ ! -f "$FULL_TSV" ]]; then
     echo "WARNING: TSV file '$FULL_TSV' not found, skipping." >&2
