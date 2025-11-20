@@ -144,7 +144,7 @@ for TSV_FILE in "${FILES[@]}"; do
     echo "WARNING: update script '$UPDATE_RULES_SCRIPT' is not executable; using existing '$IN' as-is." >&2
   fi
 
-  RUN_ID=$(date +%Y%m%dT%H%M%S)
+  RUN_ID=$BASENAME
   TIMESTAMP=$(date +"%Y-%m-%dT%H:%M:%S")
 
   TIME_LOG_JAVA="$LOGDIR/time-java-$RUN_ID.txt"
