@@ -25,6 +25,9 @@ sudo apt install openjdk-11-jdk
 sudo update-alternatives --config java  # and choose jdk-11 as default 
 
 mvn clean install -DskipTests
+
+cd hdt-java-cli
+mvn clean install -DskipTests
 ```
 
 Generate tsv representations of vcf files:
