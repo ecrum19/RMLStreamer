@@ -130,9 +130,8 @@ for TSV_FILE in "${FILES[@]}"; do
   OUT_DIR="$OUT_ROOT_DIR"
   OUT_NAME="${BASENAME}_out"
   OUT="$OUT_DIR/$OUT_NAME"
-  OUT_COMMAND_DIR="$OUT/.nq"
 
-  mkdir -p "$OUT_DIR"
+  mkdir -p "$OUT"
 
   echo "=== Running experiment for $FULL_TSV ==="
 
@@ -157,7 +156,7 @@ for TSV_FILE in "${FILES[@]}"; do
   TSV_SIZE=$(stat_size "$FULL_TSV")
 
   # ----- RMLStreamer run -----
-  JAVA_CMD=(java -jar "$JAR" toFile -m "$IN" -o "$OUT_COMMAND_DIR")
+  JAVA_CMD=(java -jar "$JAR" toFile -m "$IN" -o "$OUT")
 
   EXIT_CODE_JAVA=0
   if have_gnu_time; then
