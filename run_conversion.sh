@@ -16,7 +16,7 @@ LOGDIR=${LOGDIR:-run_metrics}
 
 # Script that updates rules.ttl with the current TSV filename
 # It will be called as:  update_rules.sh <tsv_path> <rules_file>
-UPDATE_RULES_SCRIPT=${UPDATE_RULES_SCRIPT:-./update_rules.sh}
+UPDATE_RULES_SCRIPT=${UPDATE_RULES_SCRIPT:-bash update_rules.sh}
 
 # rdf2hdt binary
 HDT=${RDF2HDT:-bin/rdf2hdt.sh}
@@ -127,7 +127,7 @@ for TSV_FILE in "${FILES[@]}"; do
   fi
 
   BASENAME="${TSV_FILE%.tsv}"          # strip the .tsv suffix
-  OUT_DIR="$OUT_ROOT_DIR/$BASENAME"
+  OUT_DIR="$OUT_ROOT_DIR"
   OUT_NAME="${BASENAME}_out"
   OUT="$OUT_DIR/$OUT_NAME"
   OUT_COMMAND_DIR="$OUT/.nq"
@@ -157,7 +157,7 @@ for TSV_FILE in "${FILES[@]}"; do
   TSV_SIZE=$(stat_size "$FULL_TSV")
 
   # ----- RMLStreamer run -----
-  JAVA_CMD=(java -jar "$JAR" toFile -m "$IN" -o "$OUT")
+  JAVA_CMD=(java -jar "$JAR" toFile -m "$IN" -o "$OUT_COMMAND_DIR")
 
   EXIT_CODE_JAVA=0
   if have_gnu_time; then
@@ -165,6 +165,12 @@ for TSV_FILE in "${FILES[@]}"; do
   else
     { time -p "${JAVA_CMD[@]}"; } >"$TIME_LOG_JAVA" 2>&1 || EXIT_CODE_JAVA=$?
   fi
+
+  for NO_EXT_FILE in "$OUT"/*; do
+    if [[ -f "$NO_EXT_FILE" ]]; then
+      mv "${OUT}/${NO_EXT_FILE}" "${OUT}/${NO_EXT_FILE}.nq"
+    fi
+  done
 
   # Post-run metrics for Java/RML
   OUT_SIZE=$(stat_size "$OUT")
