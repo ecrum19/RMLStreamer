@@ -13,6 +13,7 @@ kafka_2*/
 scripts/node_modules
 
 run_output/
+run_metrics/
 vcf_files/
 *.vcf
 *.tsv
