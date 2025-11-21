@@ -1,0 +1,65 @@
+{
+  "run_id": "0GOOR_HG002",
+  "timestamp": "2025-11-21T14:17:17",
+  "input_tsv": "0GOOR_HG002.tsv",
+  "java_command": "java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m rules.ttl -o run_output/0GOOR_HG002_out ",
+  "java_exit_code": 0,
+  "gzip_exit_code": 0,
+  "hdt_exit_code": 0,
+  "java_timing": {
+    "wall_seconds": 162.330,
+    "user_seconds": 798.20,
+    "sys_seconds": 117.72,
+    "max_rss_kb": 2097180
+  },
+  "gzip": {
+    "input_nq_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq",
+    "input_nq_size_bytes": 5450318428,
+    "output_gz_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq.gz",
+    "output_gz_size_bytes": 246335693,
+    "timing": {
+      "wall_seconds": 35.480,
+      "user_seconds": 34.80,
+      "sys_seconds": 0.67,
+      "max_rss_kb": 2048
+    }
+  },
+  "hdt_conversion": {
+    "input_nq_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq",
+    "input_nq_size_bytes": 5450318428,
+    "output_hdt_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.hdt",
+    "output_hdt_size_bytes": 283178583,
+    "timing": {
+      "wall_seconds": 162.900,
+      "user_seconds": 303.75,
+      "sys_seconds": 4.23,
+      "max_rss_kb": 6428768
+    }
+  },
+  "artifacts": {
+    "jar": "RMLStreamer-v2.5.0-standalone.jar",
+    "mapping_file": "rules.ttl",
+    "input_mapping_size_bytes": 2262,
+    "input_tsv_size_bytes": 387847144,
+    "output_dir": "run_output/0GOOR_HG002_out",
+    "output_dir_size_bytes": 5450318428,
+    "output_triples": {
+  "run_output/0GOOR_HG002_out/1.nq": 8168321,
+  "run_output/0GOOR_HG002_out/2.nq": 8200381,
+  "run_output/0GOOR_HG002_out/3.nq": 8167677,
+  "run_output/0GOOR_HG002_out/4.nq": 8182720,
+  "run_output/0GOOR_HG002_out/5.nq": 8131557,
+  "run_output/0GOOR_HG002_out/6.nq": 8136940,
+  "TOTAL": 48987596
+},
+    "combined_nq_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq",
+    "combined_nq_size_bytes": 5450318428,
+    "gzip_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq.gz",
+    "gzip_size_bytes": 246335693,
+    "hdt_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.hdt",
+    "hdt_size_bytes": 283178583
+  },
+  "java": {
+    "version_header": "openjdk version \"11.0.28\" 2025-07-15"
+  }
+}

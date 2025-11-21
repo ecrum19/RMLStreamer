@@ -18,7 +18,7 @@ rr:TriplesMap a rr:TriplesMap ;
   rml:logicalSource [
     rml:source [
       a csvw:Table;
-      csvw:url "PG0001202-BLD.Genotyping.tsv";
+      csvw:url "PG0001199-BLD.SNPs.tsv";
       csvw:dialect [
         a csvw:Dialect;
         csvw:delimiter "\t";

@@ -1,0 +1,65 @@
+{
+  "run_id": "PG0001199-BLD.SNPs",
+  "timestamp": "2025-11-21T14:39:57",
+  "input_tsv": "PG0001199-BLD.SNPs.tsv",
+  "java_command": "java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m rules.ttl -o run_output/PG0001199-BLD.SNPs_out ",
+  "java_exit_code": 0,
+  "gzip_exit_code": 0,
+  "hdt_exit_code": 0,
+  "java_timing": {
+    "wall_seconds": 95.100,
+    "user_seconds": 441.69,
+    "sys_seconds": 60.53,
+    "max_rss_kb": 2011972
+  },
+  "gzip": {
+    "input_nq_path": "run_output/PG0001199-BLD.SNPs_out/PG0001199-BLD.SNPs.nq",
+    "input_nq_size_bytes": 2798995849,
+    "output_gz_path": "run_output/PG0001199-BLD.SNPs_out/PG0001199-BLD.SNPs.nq.gz",
+    "output_gz_size_bytes": 137677727,
+    "timing": {
+      "wall_seconds": 19.480,
+      "user_seconds": 19.13,
+      "sys_seconds": 0.33,
+      "max_rss_kb": 2048
+    }
+  },
+  "hdt_conversion": {
+    "input_nq_path": "run_output/PG0001199-BLD.SNPs_out/PG0001199-BLD.SNPs.nq",
+    "input_nq_size_bytes": 2798995849,
+    "output_hdt_path": "run_output/PG0001199-BLD.SNPs_out/PG0001199-BLD.SNPs.hdt",
+    "output_hdt_size_bytes": 156680182,
+    "timing": {
+      "wall_seconds": 90.040,
+      "user_seconds": 162.46,
+      "sys_seconds": 3.30,
+      "max_rss_kb": 6208544
+    }
+  },
+  "artifacts": {
+    "jar": "RMLStreamer-v2.5.0-standalone.jar",
+    "mapping_file": "rules.ttl",
+    "input_mapping_size_bytes": 2269,
+    "input_tsv_size_bytes": 985491591,
+    "output_dir": "run_output/PG0001199-BLD.SNPs_out",
+    "output_dir_size_bytes": 2798995849,
+    "output_triples": {
+  "run_output/PG0001199-BLD.SNPs_out/1.nq": 3793755,
+  "run_output/PG0001199-BLD.SNPs_out/2.nq": 3983091,
+  "run_output/PG0001199-BLD.SNPs_out/3.nq": 4059398,
+  "run_output/PG0001199-BLD.SNPs_out/4.nq": 4126185,
+  "run_output/PG0001199-BLD.SNPs_out/5.nq": 4320316,
+  "run_output/PG0001199-BLD.SNPs_out/6.nq": 3928960,
+  "TOTAL": 24211705
+},
+    "combined_nq_path": "run_output/PG0001199-BLD.SNPs_out/PG0001199-BLD.SNPs.nq",
+    "combined_nq_size_bytes": 2798995849,
+    "gzip_path": "run_output/PG0001199-BLD.SNPs_out/PG0001199-BLD.SNPs.nq.gz",
+    "gzip_size_bytes": 137677727,
+    "hdt_path": "run_output/PG0001199-BLD.SNPs_out/PG0001199-BLD.SNPs.hdt",
+    "hdt_size_bytes": 156680182
+  },
+  "java": {
+    "version_header": "openjdk version \"11.0.28\" 2025-07-15"
+  }
+}

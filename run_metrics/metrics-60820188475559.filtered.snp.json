@@ -1,0 +1,65 @@
+{
+  "run_id": "60820188475559.filtered.snp",
+  "timestamp": "2025-11-21T13:29:08",
+  "input_tsv": "60820188475559.filtered.snp.tsv",
+  "java_command": "java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m rules.ttl -o run_output/60820188475559.filtered.snp_out ",
+  "java_exit_code": 0,
+  "gzip_exit_code": 0,
+  "hdt_exit_code": 0,
+  "java_timing": {
+    "wall_seconds": 167.740,
+    "user_seconds": 829.68,
+    "sys_seconds": 119.54,
+    "max_rss_kb": 1998600
+  },
+  "gzip": {
+    "input_nq_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq",
+    "input_nq_size_bytes": 5450318428,
+    "output_gz_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq.gz",
+    "output_gz_size_bytes": 246717935,
+    "timing": {
+      "wall_seconds": 36.500,
+      "user_seconds": 35.83,
+      "sys_seconds": 0.67,
+      "max_rss_kb": 2048
+    }
+  },
+  "hdt_conversion": {
+    "input_nq_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq",
+    "input_nq_size_bytes": 5450318428,
+    "output_hdt_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.hdt",
+    "output_hdt_size_bytes": 283178871,
+    "timing": {
+      "wall_seconds": 164.520,
+      "user_seconds": 310.66,
+      "sys_seconds": 4.24,
+      "max_rss_kb": 6305048
+    }
+  },
+  "artifacts": {
+    "jar": "RMLStreamer-v2.5.0-standalone.jar",
+    "mapping_file": "rules.ttl",
+    "input_mapping_size_bytes": 2262,
+    "input_tsv_size_bytes": 1233012928,
+    "output_dir": "run_output/60820188475559.filtered.snp_out",
+    "output_dir_size_bytes": 10900636856,
+    "output_triples": {
+  "run_output/60820188475559.filtered.snp_out/1.nq": 8167677,
+  "run_output/60820188475559.filtered.snp_out/2.nq": 8182720,
+  "run_output/60820188475559.filtered.snp_out/3.nq": 8200381,
+  "run_output/60820188475559.filtered.snp_out/4.nq": 8136940,
+  "run_output/60820188475559.filtered.snp_out/5.nq": 8168321,
+  "run_output/60820188475559.filtered.snp_out/6.nq": 8131557,
+  "TOTAL": 48987596
+},
+    "combined_nq_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq",
+    "combined_nq_size_bytes": 5450318428,
+    "gzip_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq.gz",
+    "gzip_size_bytes": 246717935,
+    "hdt_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.hdt",
+    "hdt_size_bytes": 283178871
+  },
+  "java": {
+    "version_header": "openjdk version \"11.0.28\" 2025-07-15"
+  }
+}

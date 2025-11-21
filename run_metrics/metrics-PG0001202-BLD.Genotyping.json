@@ -1,0 +1,65 @@
+{
+  "run_id": "PG0001202-BLD.Genotyping",
+  "timestamp": "2025-11-21T14:45:23",
+  "input_tsv": "PG0001202-BLD.Genotyping.tsv",
+  "java_command": "java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m rules.ttl -o run_output/PG0001202-BLD.Genotyping_out ",
+  "java_exit_code": 0,
+  "gzip_exit_code": 0,
+  "hdt_exit_code": 0,
+  "java_timing": {
+    "wall_seconds": 66.680,
+    "user_seconds": 304.25,
+    "sys_seconds": 41.58,
+    "max_rss_kb": 2009304
+  },
+  "gzip": {
+    "input_nq_path": "run_output/PG0001202-BLD.Genotyping_out/PG0001202-BLD.Genotyping.nq",
+    "input_nq_size_bytes": 1918386521,
+    "output_gz_path": "run_output/PG0001202-BLD.Genotyping_out/PG0001202-BLD.Genotyping.nq.gz",
+    "output_gz_size_bytes": 84595191,
+    "timing": {
+      "wall_seconds": 14.010,
+      "user_seconds": 13.78,
+      "sys_seconds": 0.21,
+      "max_rss_kb": 2048
+    }
+  },
+  "hdt_conversion": {
+    "input_nq_path": "run_output/PG0001202-BLD.Genotyping_out/PG0001202-BLD.Genotyping.nq",
+    "input_nq_size_bytes": 1918386521,
+    "output_hdt_path": "run_output/PG0001202-BLD.Genotyping_out/PG0001202-BLD.Genotyping.hdt",
+    "output_hdt_size_bytes": 104244879,
+    "timing": {
+      "wall_seconds": 60.690,
+      "user_seconds": 92.02,
+      "sys_seconds": 2.74,
+      "max_rss_kb": 5906736
+    }
+  },
+  "artifacts": {
+    "jar": "RMLStreamer-v2.5.0-standalone.jar",
+    "mapping_file": "rules.ttl",
+    "input_mapping_size_bytes": 2275,
+    "input_tsv_size_bytes": 156446757,
+    "output_dir": "run_output/PG0001202-BLD.Genotyping_out",
+    "output_dir_size_bytes": 1918386521,
+    "output_triples": {
+  "run_output/PG0001202-BLD.Genotyping_out/1.nq": 2787064,
+  "run_output/PG0001202-BLD.Genotyping_out/2.nq": 2851730,
+  "run_output/PG0001202-BLD.Genotyping_out/3.nq": 2779406,
+  "run_output/PG0001202-BLD.Genotyping_out/4.nq": 2792552,
+  "run_output/PG0001202-BLD.Genotyping_out/5.nq": 2776788,
+  "run_output/PG0001202-BLD.Genotyping_out/6.nq": 2754633,
+  "TOTAL": 16742173
+},
+    "combined_nq_path": "run_output/PG0001202-BLD.Genotyping_out/PG0001202-BLD.Genotyping.nq",
+    "combined_nq_size_bytes": 1918386521,
+    "gzip_path": "run_output/PG0001202-BLD.Genotyping_out/PG0001202-BLD.Genotyping.nq.gz",
+    "gzip_size_bytes": 84595191,
+    "hdt_path": "run_output/PG0001202-BLD.Genotyping_out/PG0001202-BLD.Genotyping.hdt",
+    "hdt_size_bytes": 104244879
+  },
+  "java": {
+    "version_header": "openjdk version \"11.0.28\" 2025-07-15"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "run_id": "bsr6402.combined",
+  "timestamp": "2025-11-21T14:27:15",
+  "input_tsv": "bsr6402.combined.tsv",
+  "java_command": "java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m rules.ttl -o run_output/bsr6402.combined_out ",
+  "java_exit_code": 0,
+  "gzip_exit_code": 0,
+  "hdt_exit_code": 0,
+  "java_timing": {
+    "wall_seconds": 126.030,
+    "user_seconds": 613.16,
+    "sys_seconds": 83.99,
+    "max_rss_kb": 2006032
+  },
+  "gzip": {
+    "input_nq_path": "run_output/bsr6402.combined_out/bsr6402.combined.nq",
+    "input_nq_size_bytes": 3853605028,
+    "output_gz_path": "run_output/bsr6402.combined_out/bsr6402.combined.nq.gz",
+    "output_gz_size_bytes": 204170847,
+    "timing": {
+      "wall_seconds": 27.700,
+      "user_seconds": 27.26,
+      "sys_seconds": 0.43,
+      "max_rss_kb": 2048
+    }
+  },
+  "hdt_conversion": {
+    "input_nq_path": "run_output/bsr6402.combined_out/bsr6402.combined.nq",
+    "input_nq_size_bytes": 3853605028,
+    "output_hdt_path": "run_output/bsr6402.combined_out/bsr6402.combined.hdt",
+    "output_hdt_size_bytes": 223606733,
+    "timing": {
+      "wall_seconds": 132.480,
+      "user_seconds": 255.96,
+      "sys_seconds": 3.86,
+      "max_rss_kb": 6382160
+    }
+  },
+  "artifacts": {
+    "jar": "RMLStreamer-v2.5.0-standalone.jar",
+    "mapping_file": "rules.ttl",
+    "input_mapping_size_bytes": 2267,
+    "input_tsv_size_bytes": 1487100051,
+    "output_dir": "run_output/bsr6402.combined_out",
+    "output_dir_size_bytes": 3853605028,
+    "output_triples": {
+  "run_output/bsr6402.combined_out/1.nq": 5731866,
+  "run_output/bsr6402.combined_out/2.nq": 5723158,
+  "run_output/bsr6402.combined_out/3.nq": 5758956,
+  "run_output/bsr6402.combined_out/4.nq": 5680969,
+  "run_output/bsr6402.combined_out/5.nq": 5699407,
+  "run_output/bsr6402.combined_out/6.nq": 5691609,
+  "TOTAL": 34285965
+},
+    "combined_nq_path": "run_output/bsr6402.combined_out/bsr6402.combined.nq",
+    "combined_nq_size_bytes": 3853605028,
+    "gzip_path": "run_output/bsr6402.combined_out/bsr6402.combined.nq.gz",
+    "gzip_size_bytes": 204170847,
+    "hdt_path": "run_output/bsr6402.combined_out/bsr6402.combined.hdt",
+    "hdt_size_bytes": 223606733
+  },
+  "java": {
+    "version_header": "openjdk version \"11.0.28\" 2025-07-15"
+  }
+}
