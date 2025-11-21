@@ -27,8 +27,8 @@ METRICS_CSV="$LOGDIR/metrics.csv"
 
 # List of TSV input files (relative to $DATA_DIR)
 FILES=(
-  # "0GOOR_HG002.tsv"
-  "60820188475559.filtered.snp.tsv"
+  "0GOOR_HG002.tsv"
+  # "60820188475559.filtered.snp.tsv"
   # "bsr6402.combined.tsv"
   # "PG0000566-BLD.snps.tsv"
   # "PG0001199-BLD.SNPs.tsv"
@@ -133,16 +133,12 @@ for TSV_FILE in "${FILES[@]}"; do
 
   mkdir -p "$OUT"
 
-  echo "=== Running experiment for $FULL_TSV ==="
 
-  # Call external script to update rules.ttl with the current file name
-  if [[ -x "$UPDATE_RULES_SCRIPT" ]]; then
-    echo "Updating mapping '$IN' using '$UPDATE_RULES_SCRIPT' for '$FULL_TSV'..."
-    "$UPDATE_RULES_SCRIPT"
-  else
-    echo "WARNING: update script '$UPDATE_RULES_SCRIPT' is not executable; using existing '$IN' as-is." >&2
-  fi
-
+  echo "Updating mapping '$IN' using '$UPDATE_RULES_SCRIPT' for '$FULL_TSV'..."
+  "$UPDATE_RULES_SCRIPT" || {
+    echo "WARNING: update script '$UPDATE_RULES_SCRIPT' failed; using existing '$IN' as-is." >&2
+  }
+  
   RUN_ID=$BASENAME
   TIMESTAMP=$(date +"%Y-%m-%dT%H:%M:%S")
 
