@@ -119,7 +119,7 @@ for TSV_FILE in "${FILES[@]}"; do
   FULL_TSV="$TSV_FILE"
   
   # Script that updates rules.ttl with the current TSV filename
-  UPDATE_RULES_SCRIPT=${UPDATE_RULES_SCRIPT:-./update_rules.sh}
+  UPDATE_RULES_SCRIPT=${UPDATE_RULES_SCRIPT:-update_rules.sh}
 
   if [[ ! -f "$FULL_TSV" ]]; then
     echo "WARNING: TSV file '$FULL_TSV' not found, skipping." >&2
@@ -135,7 +135,7 @@ for TSV_FILE in "${FILES[@]}"; do
 
 
   echo "Updating mapping '$IN' using '$UPDATE_RULES_SCRIPT' for '$FULL_TSV'..."
-  "$UPDATE_RULES_SCRIPT" "$FULL_TSV" || {
+  "bash" "$UPDATE_RULES_SCRIPT" "$FULL_TSV" || {
     echo "WARNING: update script '$UPDATE_RULES_SCRIPT' failed; using existing '$IN' as-is." >&2
   }
   
