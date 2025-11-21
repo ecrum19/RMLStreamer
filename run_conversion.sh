@@ -29,10 +29,10 @@ METRICS_CSV="$LOGDIR/metrics.csv"
 FILES=(
   "0GOOR_HG002.tsv"
   # "60820188475559.filtered.snp.tsv"
-  # "bsr6402.combined.tsv"
-  # "PG0000566-BLD.snps.tsv"
-  # "PG0001199-BLD.SNPs.tsv"
-  # "PG0001202-BLD.Genotyping.tsv"
+  "bsr6402.combined.tsv"
+  "PG0000566-BLD.snps.tsv"
+  "PG0001199-BLD.SNPs.tsv"
+  "PG0001202-BLD.Genotyping.tsv"
 )
 
 # ---------- Helper functions ----------
