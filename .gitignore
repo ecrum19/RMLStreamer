@@ -12,6 +12,8 @@ kafka_2*/
 !docker/configuration.properties
 scripts/node_modules
 
+!time-*
+
 run_output/
 vcf_files/
 *.vcf
