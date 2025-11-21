@@ -30,20 +30,20 @@ cd hdt-java-cli
 mvn clean install -DskipTests
 ```
 
-Generate tsv representations of vcf files:
+Generate tsv representations of vcf files (for all VCFs to be converted):
 ```
 bash vcf_as_tsv.sh filename.vcf
 ```
 
-Make support scripts executable:
-```
-chmod +x vcf_as_tsv.sh
-chmod +x yourscript.sh
-```
 Run VCF Conversion:
 ```
 bash run_test.sh
 ```
+
+## TODO:
+Develop a custom conversion implementation for directly converting VCF files (without TSV conversion)
+Make the run script automatically sense the vcf (converted to tsv) files for conversion...
+
 
 
 ### Quick start (standalone)
