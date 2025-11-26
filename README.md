@@ -16,6 +16,11 @@ wget --content-disposition --trust-server-names \
 
 ```
 
+Install Brotli:
+```
+sudo apt install brotli
+```
+
 Install HDT library:
 ```
 git clone git@github.com:rdfhdt/hdt-java.git

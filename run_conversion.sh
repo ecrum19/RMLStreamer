@@ -28,7 +28,7 @@ METRICS_CSV="$LOGDIR/metrics.csv"
 # List of TSV input files (relative to $DATA_DIR)
 FILES=(
   "0GOOR_HG002.tsv"
-  # "60820188475559.filtered.snp.tsv"
+  "60820188475559.filtered.snp.tsv"
   "bsr6402.combined.tsv"
   "PG0000566-BLD.snps.tsv"
   "PG0001199-BLD.SNPs.tsv"
@@ -144,6 +144,7 @@ for TSV_FILE in "${FILES[@]}"; do
 
   TIME_LOG_JAVA="$LOGDIR/time-java-$RUN_ID.txt"
   TIME_LOG_GZIP="$LOGDIR/time-gzip-$RUN_ID.txt"
+  TIME_LOG_BROTLI="$LOGDIR/time-brotli-$RUN_ID.txt"
   TIME_LOG_HDT="$LOGDIR/time-hdt-$RUN_ID.txt"
   METRICS_JSON="$LOGDIR/metrics-$RUN_ID.json"
 
@@ -207,14 +208,21 @@ for TSV_FILE in "${FILES[@]}"; do
     NQ_SIZE=0
     GZ_PATH=""
     GZ_SIZE=0
+    BR_PATH=""
+    BR_SIZE=0
     HDT_PATH=""
     HDT_SIZE=0
     EXIT_CODE_GZIP=0
+    EXIT_CODE_BROTLI=0
     EXIT_CODE_HDT=0
     WALL_SEC_GZIP="null"
     USER_SEC_GZIP="null"
     SYS_SEC_GZIP="null"
     MAX_RSS_KB_GZIP="null"
+    WALL_SEC_BROTLI="null"
+    USER_SEC_BROTLI="null"
+    SYS_SEC_BROTLI="null"
+    MAX_RSS_KB_BROTLI="null"
     WALL_SEC_HDT="null"
     USER_SEC_HDT="null"
     SYS_SEC_HDT="null"
@@ -259,6 +267,39 @@ for TSV_FILE in "${FILES[@]}"; do
     fi
 
     [[ -z "$MAX_RSS_KB_GZIP" ]] && MAX_RSS_KB_GZIP="null"
+
+
+    # ----- brotli combined.nq with timing -----
+    BR_PATH="$BIG_NQ.br"
+    EXIT_CODE_BROTLI=0
+
+    if have_gnu_time; then
+      /usr/bin/time -v -o "$TIME_LOG_BROTLI" -- brotli -kf "$BIG_NQ" || EXIT_CODE_BROTLI=$?
+    else
+      { time -p brotli -kf "$BIG_NQ"; } >"$TIME_LOG_BROTLI" 2>&1 || EXIT_CODE_BROTLI=$?
+    fi
+
+    BR_SIZE=$(stat_size "$BR_PATH")
+
+    WALL_SEC_BROTLI=""
+    USER_SEC_BROTLI=""
+    SYS_SEC_BROTLI=""
+    MAX_RSS_KB_BROTLI=""
+
+    if have_gnu_time; then
+      ELAPSED=$(awk -F': ' '/Elapsed \(wall clock\) time/ {print $2}' "$TIME_LOG_BROTLI")
+      WALL_SEC_BROTLI=$(printf "%s" "$ELAPSED" | elapsed_to_seconds)
+      USER_SEC_BROTLI=$(awk -F': ' '/User time \(seconds\)/ {print $2}' "$TIME_LOG_BROTLI")
+      SYS_SEC_BROTLI=$(awk -F': '  '/System time \(seconds\)/ {print $2}' "$TIME_LOG_BROTLI")
+      MAX_RSS_KB_BROTLI=$(awk -F': ' '/Maximum resident set size/ {print $2}' "$TIME_LOG_BROTLI")
+    else
+      WALL_SEC_BROTLI=$(awk '/^real/ {print $2}' "$TIME_LOG_BROTLI")
+      USER_SEC_BROTLI=$(awk '/^user/ {print $2}' "$TIME_LOG_BROTLI")
+      SYS_SEC_BROTLI=$(awk  '/^sys/  {print $2}' "$TIME_LOG_BROTLI")
+      MAX_RSS_KB_BROTLI=""
+    fi
+
+    [[ -z "$MAX_RSS_KB_BROTLI" ]] && MAX_RSS_KB_BROTLI="null"
 
     # ----- Convert combined.nq to HDT with timing -----
     HDT_PATH="$OUT/$BASENAME.hdt"
@@ -329,6 +370,18 @@ for TSV_FILE in "${FILES[@]}"; do
       "max_rss_kb": ${MAX_RSS_KB_GZIP:-null}
     }
   },
+  "brotli": {
+    "input_nq_path": "${BIG_NQ:-}",
+    "input_nq_size_bytes": ${NQ_SIZE:-0},
+    "output_brotli_path": "${BROTLI_PATH:-}",
+    "output_brotli_size_bytes": ${BROTLI_SIZE:-0},
+    "timing": {
+      "wall_seconds": ${WALL_SEC_BROTLI:-null},
+      "user_seconds": ${USER_SEC_BROTLI:-null},
+      "sys_seconds": ${SYS_SEC_BROTLI:-null},
+      "max_rss_kb": ${MAX_RSS_KB_BROTLI:-null}
+    }
+  },
   "hdt_conversion": {
     "input_nq_path": "${BIG_NQ:-}",
     "input_nq_size_bytes": ${NQ_SIZE:-0},
@@ -353,6 +406,8 @@ for TSV_FILE in "${FILES[@]}"; do
     "combined_nq_size_bytes": ${NQ_SIZE:-0},
     "gzip_path": "${GZ_PATH:-}",
     "gzip_size_bytes": ${GZ_SIZE:-0},
+    "brotli_path": "${BROTLI_PATH:-}",
+    "brotli_size_bytes": ${BROTLI_SIZE:-0},
     "hdt_path": "${HDT_PATH:-}",
     "hdt_size_bytes": ${HDT_SIZE:-0}
   },
@@ -363,7 +418,7 @@ for TSV_FILE in "${FILES[@]}"; do
 EOF
 
   # ---------- Append CSV ----------
-  echo "$RUN_ID,$TIMESTAMP,$FULL_TSV,$EXIT_CODE_JAVA,${EXIT_CODE_GZIP:-0},${EXIT_CODE_HDT:-0},$WALL_SEC_JAVA,$USER_SEC_JAVA,$SYS_SEC_JAVA,$MAX_RSS_KB_JAVA,$IN_SIZE,$TSV_SIZE,$OUT_SIZE,$TOTAL_TRIPLES,$JAR,$IN,$OUT,${NQ_SIZE:-0},${GZ_SIZE:-0},${HDT_SIZE:-0}" >> "$METRICS_CSV"
+  echo "$RUN_ID,$TIMESTAMP,$FULL_TSV,$EXIT_CODE_JAVA,${EXIT_CODE_GZIP:-0},${EXIT_CODE_BROTLI:-0},${EXIT_CODE_HDT:-0},$WALL_SEC_JAVA,$USER_SEC_JAVA,$SYS_SEC_JAVA,$MAX_RSS_KB_JAVA,$IN_SIZE,$TSV_SIZE,$OUT_SIZE,$TOTAL_TRIPLES,$JAR,$IN,$OUT,${NQ_SIZE:-0},${GZ_SIZE:-0},${BROTLI_SIZE:-0},${HDT_SIZE:-0}" >> "$METRICS_CSV"
 
   echo "Done for $FULL_TSV."
   echo "  JSON metrics: $METRICS_JSON"
