@@ -198,7 +198,7 @@ for TSV_FILE in "${FILES[@]}"; do
   BIG_NQ="$OUT/${BASENAME}.nq"
 
   shopt -s nullglob
-  NQ_FILES=("$OUT"/*.nq)
+  NQ_FILES=("$OUT"/*)
   shopt -u nullglob
 
   if (( ${#NQ_FILES[@]} == 0 )); then
