@@ -13,7 +13,12 @@ Download the RMLStreamer STANDALONE jar file:
 ```
 wget --content-disposition --trust-server-names \
   https://github.com/RMLio/RMLStreamer/releases/download/v2.5.0/RMLStreamer-v2.5.0-standalone.jar
+```
 
+If JAVA errors occur, run the following commands:
+```
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export PATH="$JAVA_HOME/bin:$PATH"
 ```
 
 Install Brotli:
