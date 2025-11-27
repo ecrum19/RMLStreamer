@@ -273,11 +273,11 @@ for TSV_FILE in "${FILES[@]}"; do
     BR_PATH="$BIG_NQ.br"
     EXIT_CODE_BROTLI=0
 
-    if have_gnu_time; then
-      /usr/bin/time -v -o "$TIME_LOG_BROTLI" -- brotli -kf "$BIG_NQ" || EXIT_CODE_BROTLI=$?
-    else
-      { time -p brotli -kf "$BIG_NQ"; } >"$TIME_LOG_BROTLI" 2>&1 || EXIT_CODE_BROTLI=$?
-    fi
+    # if have_gnu_time; then
+    #   /usr/bin/time -v -o "$TIME_LOG_BROTLI" -- brotli -kf "$BIG_NQ" || EXIT_CODE_BROTLI=$?
+    # else
+    #   { time -p brotli -kf "$BIG_NQ"; } >"$TIME_LOG_BROTLI" 2>&1 || EXIT_CODE_BROTLI=$?
+    # fi
 
     BR_SIZE=$(stat_size "$BR_PATH")
 
@@ -314,7 +314,6 @@ for TSV_FILE in "${FILES[@]}"; do
         { time -p bash "$HDT" "../../RMLStreamer/${BIG_NQ}" "../../RMLStreamer/${HDT_PATH}"; } >"../../RMLStreamer/${TIME_LOG_HDT}" 2>&1 || EXIT_CODE_HDT=$?
       fi
     )
-
 
     HDT_SIZE=$(stat_size "$HDT_PATH")
 
