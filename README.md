@@ -15,12 +15,6 @@ wget --content-disposition --trust-server-names \
   https://github.com/RMLio/RMLStreamer/releases/download/v2.5.0/RMLStreamer-v2.5.0-standalone.jar
 ```
 
-If JAVA errors occur, run the following commands:
-```
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-export PATH="$JAVA_HOME/bin:$PATH"
-```
-
 Install Brotli:
 ```
 sudo apt install brotli
@@ -34,6 +28,9 @@ cd hdt-java
 sudo apt install openjdk-11-jdk
 sudo update-alternatives --config java  # and choose jdk-11 as default 
 
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 \
+export PATH="$JAVA_HOME/bin:$PATH"
+
 mvn clean install -DskipTests
 
 cd hdt-java-cli
@@ -42,7 +39,7 @@ mvn clean install -DskipTests
 
 Generate tsv representations of vcf files (for all VCFs to be converted):
 ```
-bash vcf_as_tsv.sh filename.vcf
+bash vcf_as_tsv.sh vcf_files/ 
 ```
 
 Run VCF Conversion:

@@ -273,11 +273,11 @@ for TSV_FILE in "${FILES[@]}"; do
     BR_PATH="$BIG_NQ.br"
     EXIT_CODE_BROTLI=0
 
-    # if have_gnu_time; then
-    #   /usr/bin/time -v -o "$TIME_LOG_BROTLI" -- brotli -kf "$BIG_NQ" || EXIT_CODE_BROTLI=$?
-    # else
-    #   { time -p brotli -kf "$BIG_NQ"; } >"$TIME_LOG_BROTLI" 2>&1 || EXIT_CODE_BROTLI=$?
-    # fi
+    if have_gnu_time; then
+      /usr/bin/time -v -o "$TIME_LOG_BROTLI" -- brotli -q 7 "$BIG_NQ" || EXIT_CODE_BROTLI=$?
+    else
+      { time -p brotli -q 7 "$BIG_NQ"; } >"$TIME_LOG_BROTLI" 2>&1 || EXIT_CODE_BROTLI=$?
+    fi
 
     BR_SIZE=$(stat_size "$BR_PATH")
 
