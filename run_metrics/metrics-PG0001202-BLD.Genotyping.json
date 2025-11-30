@@ -27,8 +27,8 @@
   "brotli": {
     "input_nq_path": "run_output/PG0001202-BLD.Genotyping_out/PG0001202-BLD.Genotyping.nq",
     "input_nq_size_bytes": 1918386521,
-    "output_brotli_path": "",
-    "output_brotli_size_bytes": 0,
+    "output_brotli_path": "run_output/PG0001202-BLD.Genotyping_out/PG0001202-BLD.Genotyping.nq.br",
+    "output_brotli_size_bytes": 78249089,
     "timing": {
       "wall_seconds": 29.790,
       "user_seconds": 29.48,

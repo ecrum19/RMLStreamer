@@ -23,6 +23,7 @@ def load_single_run(path: Path) -> dict:
     java_timing = data["java_timing"]
     gzip = data["gzip"]
     hdt = data["hdt_conversion"]
+    brotli = data["brotli"]
 
     row = {
         "run_id": run_id,
@@ -31,24 +32,29 @@ def load_single_run(path: Path) -> dict:
         "nq_MB": artifacts["combined_nq_size_bytes"] / 1e6,
         "gzip_MB": artifacts["gzip_size_bytes"] / 1e6,
         "hdt_MB": artifacts["hdt_size_bytes"] / 1e6,
+        "brotli_MB": brotli["output_brotli_size_bytes"] / 1e6,
         # Triples
         "triples_M": artifacts["output_triples"]["TOTAL"] / 1e6,
         # Time wall (seconds)
         "java_wall_s": java_timing["wall_seconds"],
         "gzip_wall_s": gzip["timing"]["wall_seconds"],
         "hdt_wall_s": hdt["timing"]["wall_seconds"],
+        "brotli_wall_s": brotli["timing"]["wall_seconds"],
         # Time user (seconds)
         "java_user_s": java_timing["user_seconds"],
         "gzip_user_s": gzip["timing"]["user_seconds"],
         "hdt_user_s": hdt["timing"]["user_seconds"],
+        "brotli_user_s": brotli["timing"]["user_seconds"],
         # Time system (seconds)
         "java_system_s": java_timing["sys_seconds"],
         "gzip_system_s": gzip["timing"]["sys_seconds"],
         "hdt_system_s": hdt["timing"]["sys_seconds"],
+        "brotli_system_s": brotli["timing"]["sys_seconds"],
         # Peak RSS (GB)
         "java_max_rss_GB": java_timing["max_rss_kb"] / (1024 ** 2),
         "gzip_max_rss_GB": gzip["timing"]["max_rss_kb"] / (1024 ** 2),
         "hdt_max_rss_GB": hdt["timing"]["max_rss_kb"] / (1024 ** 2),
+        "brotli_max_rss_GB": brotli["timing"]["max_rss_kb"] / (1024 ** 2),
     }
     return row
 
@@ -86,8 +92,8 @@ def make_plots(df: pd.DataFrame):
     fig.suptitle("Conversion Comparison: Size, Time, and Memory", fontsize=16)
 
     # ---- 1) Sizes per format ----
-    size_cols = ["input_vcf_MB", "nq_MB", "gzip_MB", "hdt_MB"]
-    size_labels = ["VCF", "N-Quads", "NQ (gz)", "HDT"]
+    size_cols = ["input_vcf_MB", "nq_MB", "gzip_MB", "hdt_MB", "brotli_MB"]
+    size_labels = ["VCF", "N-Quads", "NQ (gz)", "HDT", "Brotli"]
 
     width = 0.18
     offsets = [i * width - (1.5 * width) for i in range(len(size_cols))]
@@ -106,8 +112,8 @@ def make_plots(df: pd.DataFrame):
     axes[0].grid(axis="y", linestyle="--", alpha=0.4)
 
     # ---- 2) Wall-clock time per step ----
-    time_cols = ["java_wall_s", "gzip_wall_s", "hdt_wall_s"]
-    time_labels = ["RMLStreamer", "Gzip", "HDT conversion"]
+    time_cols = ["java_wall_s", "gzip_wall_s", "hdt_wall_s", "brotli_wall_s"]
+    time_labels = ["RMLStreamer", "Gzip", "HDT conversion", "Brotli"]
     width_time = 0.22
     offsets_time = [i * width_time - width_time for i in range(len(time_cols))]
 

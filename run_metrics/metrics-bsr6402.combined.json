@@ -27,8 +27,8 @@
   "brotli": {
     "input_nq_path": "run_output/bsr6402.combined_out/bsr6402.combined.nq",
     "input_nq_size_bytes": 3853605028,
-    "output_brotli_path": "",
-    "output_brotli_size_bytes": 0,
+    "output_brotli_path": "run_output/bsr6402.combined_out/bsr6402.combined.nq.br",
+    "output_brotli_size_bytes": 179421425,
     "timing": {
       "wall_seconds": 66.320,
       "user_seconds": 65.69,

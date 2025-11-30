@@ -27,8 +27,8 @@
   "brotli": {
     "input_nq_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq",
     "input_nq_size_bytes": 5450318428,
-    "output_brotli_path": "",
-    "output_brotli_size_bytes": 0,
+    "output_brotli_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq.br",
+    "output_brotli_size_bytes": 203568004,
     "timing": {
       "wall_seconds": 75.170,
       "user_seconds": 74.31,

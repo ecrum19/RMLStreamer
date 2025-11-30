@@ -27,8 +27,8 @@
   "brotli": {
     "input_nq_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq",
     "input_nq_size_bytes": 2991755325,
-    "output_brotli_path": "",
-    "output_brotli_size_bytes": 0,
+    "output_brotli_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq.br",
+    "output_brotli_size_bytes": 113201296,
     "timing": {
       "wall_seconds": 41.080,
       "user_seconds": 40.59,

@@ -27,8 +27,8 @@
   "brotli": {
     "input_nq_path": "run_output/PG0001199-BLD.SNPs_out/PG0001199-BLD.SNPs.nq",
     "input_nq_size_bytes": 2798995849,
-    "output_brotli_path": "",
-    "output_brotli_size_bytes": 0,
+    "output_brotli_path": "run_output/PG0001199-BLD.SNPs_out/PG0001199-BLD.SNPs.nq.br",
+    "output_brotli_size_bytes": 119526043,
     "timing": {
       "wall_seconds": 46.700,
       "user_seconds": 46.24,
