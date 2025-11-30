@@ -1,27 +1,39 @@
 {
   "run_id": "0GOOR_HG002",
-  "timestamp": "2025-11-21T14:17:17",
+  "timestamp": "2025-11-28T11:41:59",
   "input_tsv": "0GOOR_HG002.tsv",
   "java_command": "java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m rules.ttl -o run_output/0GOOR_HG002_out ",
   "java_exit_code": 0,
   "gzip_exit_code": 0,
   "hdt_exit_code": 0,
   "java_timing": {
-    "wall_seconds": 162.330,
-    "user_seconds": 798.20,
-    "sys_seconds": 117.72,
-    "max_rss_kb": 2097180
+    "wall_seconds": 180.740,
+    "user_seconds": 828.77,
+    "sys_seconds": 120.64,
+    "max_rss_kb": 1988128
   },
   "gzip": {
     "input_nq_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq",
     "input_nq_size_bytes": 5450318428,
     "output_gz_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq.gz",
-    "output_gz_size_bytes": 246335693,
+    "output_gz_size_bytes": 244646354,
     "timing": {
-      "wall_seconds": 35.480,
-      "user_seconds": 34.80,
-      "sys_seconds": 0.67,
+      "wall_seconds": 35.860,
+      "user_seconds": 35.16,
+      "sys_seconds": 0.68,
       "max_rss_kb": 2048
+    }
+  },
+  "brotli": {
+    "input_nq_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq",
+    "input_nq_size_bytes": 5450318428,
+    "output_brotli_path": "",
+    "output_brotli_size_bytes": 0,
+    "timing": {
+      "wall_seconds": 75.170,
+      "user_seconds": 74.31,
+      "sys_seconds": 0.83,
+      "max_rss_kb": 50152
     }
   },
   "hdt_conversion": {
@@ -30,10 +42,10 @@
     "output_hdt_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.hdt",
     "output_hdt_size_bytes": 283178583,
     "timing": {
-      "wall_seconds": 162.900,
-      "user_seconds": 303.75,
-      "sys_seconds": 4.23,
-      "max_rss_kb": 6428768
+      "wall_seconds": 161.770,
+      "user_seconds": 304.91,
+      "sys_seconds": 4.15,
+      "max_rss_kb": 6284012
     }
   },
   "artifacts": {
@@ -47,15 +59,17 @@
   "run_output/0GOOR_HG002_out/1.nq": 8168321,
   "run_output/0GOOR_HG002_out/2.nq": 8200381,
   "run_output/0GOOR_HG002_out/3.nq": 8167677,
-  "run_output/0GOOR_HG002_out/4.nq": 8182720,
+  "run_output/0GOOR_HG002_out/4.nq": 8136940,
   "run_output/0GOOR_HG002_out/5.nq": 8131557,
-  "run_output/0GOOR_HG002_out/6.nq": 8136940,
+  "run_output/0GOOR_HG002_out/6.nq": 8182720,
   "TOTAL": 48987596
 },
     "combined_nq_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq",
     "combined_nq_size_bytes": 5450318428,
     "gzip_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.nq.gz",
-    "gzip_size_bytes": 246335693,
+    "gzip_size_bytes": 244646354,
+    "brotli_path": "",
+    "brotli_size_bytes": 0,
     "hdt_path": "run_output/0GOOR_HG002_out/0GOOR_HG002.hdt",
     "hdt_size_bytes": 283178583
   },

@@ -1,27 +1,39 @@
 {
   "run_id": "PG0000566-BLD.snps",
-  "timestamp": "2025-11-21T14:34:48",
+  "timestamp": "2025-11-28T12:08:22",
   "input_tsv": "PG0000566-BLD.snps.tsv",
   "java_command": "java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m rules.ttl -o run_output/PG0000566-BLD.snps_out ",
   "java_exit_code": 0,
   "gzip_exit_code": 0,
   "hdt_exit_code": 0,
   "java_timing": {
-    "wall_seconds": 89.110,
-    "user_seconds": 418.07,
-    "sys_seconds": 57.12,
-    "max_rss_kb": 1649696
+    "wall_seconds": 91.590,
+    "user_seconds": 428.24,
+    "sys_seconds": 57.78,
+    "max_rss_kb": 1784756
   },
   "gzip": {
     "input_nq_path": "run_output/PG0000566-BLD.snps_out/PG0000566-BLD.snps.nq",
     "input_nq_size_bytes": 2646870288,
     "output_gz_path": "run_output/PG0000566-BLD.snps_out/PG0000566-BLD.snps.nq.gz",
-    "output_gz_size_bytes": 125130153,
+    "output_gz_size_bytes": 125528035,
     "timing": {
-      "wall_seconds": 19.420,
-      "user_seconds": 19.07,
-      "sys_seconds": 0.34,
+      "wall_seconds": 20.480,
+      "user_seconds": 20.14,
+      "sys_seconds": 0.33,
       "max_rss_kb": 2048
+    }
+  },
+  "brotli": {
+    "input_nq_path": "run_output/PG0000566-BLD.snps_out/PG0000566-BLD.snps.nq",
+    "input_nq_size_bytes": 2646870288,
+    "output_brotli_path": "",
+    "output_brotli_size_bytes": 0,
+    "timing": {
+      "wall_seconds": 42.250,
+      "user_seconds": 41.80,
+      "sys_seconds": 0.43,
+      "max_rss_kb": 50108
     }
   },
   "hdt_conversion": {
@@ -30,10 +42,10 @@
     "output_hdt_path": "run_output/PG0000566-BLD.snps_out/PG0000566-BLD.snps.hdt",
     "output_hdt_size_bytes": 148610707,
     "timing": {
-      "wall_seconds": 86.490,
-      "user_seconds": 155.04,
-      "sys_seconds": 3.13,
-      "max_rss_kb": 5977580
+      "wall_seconds": 86.110,
+      "user_seconds": 158.72,
+      "sys_seconds": 3.20,
+      "max_rss_kb": 6003312
     }
   },
   "artifacts": {
@@ -44,18 +56,20 @@
     "output_dir": "run_output/PG0000566-BLD.snps_out",
     "output_dir_size_bytes": 2646870288,
     "output_triples": {
-  "run_output/PG0000566-BLD.snps_out/1.nq": 3887828,
+  "run_output/PG0000566-BLD.snps_out/1.nq": 3822497,
   "run_output/PG0000566-BLD.snps_out/2.nq": 3646720,
-  "run_output/PG0000566-BLD.snps_out/3.nq": 3822497,
+  "run_output/PG0000566-BLD.snps_out/3.nq": 3962000,
   "run_output/PG0000566-BLD.snps_out/4.nq": 3648953,
   "run_output/PG0000566-BLD.snps_out/5.nq": 4016467,
-  "run_output/PG0000566-BLD.snps_out/6.nq": 3962000,
+  "run_output/PG0000566-BLD.snps_out/6.nq": 3887828,
   "TOTAL": 22984465
 },
     "combined_nq_path": "run_output/PG0000566-BLD.snps_out/PG0000566-BLD.snps.nq",
     "combined_nq_size_bytes": 2646870288,
     "gzip_path": "run_output/PG0000566-BLD.snps_out/PG0000566-BLD.snps.nq.gz",
-    "gzip_size_bytes": 125130153,
+    "gzip_size_bytes": 125528035,
+    "brotli_path": "",
+    "brotli_size_bytes": 0,
     "hdt_path": "run_output/PG0000566-BLD.snps_out/PG0000566-BLD.snps.hdt",
     "hdt_size_bytes": 148610707
   },

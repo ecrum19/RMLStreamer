@@ -1,63 +1,77 @@
 {
   "run_id": "60820188475559.filtered.snp",
-  "timestamp": "2025-11-21T13:29:08",
+  "timestamp": "2025-11-28T11:53:33",
   "input_tsv": "60820188475559.filtered.snp.tsv",
   "java_command": "java -jar RMLStreamer-v2.5.0-standalone.jar toFile -m rules.ttl -o run_output/60820188475559.filtered.snp_out ",
   "java_exit_code": 0,
   "gzip_exit_code": 0,
   "hdt_exit_code": 0,
   "java_timing": {
-    "wall_seconds": 167.740,
-    "user_seconds": 829.68,
-    "sys_seconds": 119.54,
-    "max_rss_kb": 1998600
+    "wall_seconds": 96.080,
+    "user_seconds": 457.27,
+    "sys_seconds": 66.51,
+    "max_rss_kb": 2008996
   },
   "gzip": {
     "input_nq_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq",
-    "input_nq_size_bytes": 5450318428,
+    "input_nq_size_bytes": 2991755325,
     "output_gz_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq.gz",
-    "output_gz_size_bytes": 246717935,
+    "output_gz_size_bytes": 134913420,
     "timing": {
-      "wall_seconds": 36.500,
-      "user_seconds": 35.83,
-      "sys_seconds": 0.67,
+      "wall_seconds": 21.120,
+      "user_seconds": 20.74,
+      "sys_seconds": 0.37,
       "max_rss_kb": 2048
+    }
+  },
+  "brotli": {
+    "input_nq_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq",
+    "input_nq_size_bytes": 2991755325,
+    "output_brotli_path": "",
+    "output_brotli_size_bytes": 0,
+    "timing": {
+      "wall_seconds": 41.080,
+      "user_seconds": 40.59,
+      "sys_seconds": 0.47,
+      "max_rss_kb": 54140
     }
   },
   "hdt_conversion": {
     "input_nq_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq",
-    "input_nq_size_bytes": 5450318428,
+    "input_nq_size_bytes": 2991755325,
     "output_hdt_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.hdt",
-    "output_hdt_size_bytes": 283178871,
+    "output_hdt_size_bytes": 154027686,
     "timing": {
-      "wall_seconds": 164.520,
-      "user_seconds": 310.66,
-      "sys_seconds": 4.24,
-      "max_rss_kb": 6305048
+      "wall_seconds": 86.940,
+      "user_seconds": 132.41,
+      "sys_seconds": 3.08,
+      "max_rss_kb": 5870952
     }
   },
   "artifacts": {
     "jar": "RMLStreamer-v2.5.0-standalone.jar",
     "mapping_file": "rules.ttl",
-    "input_mapping_size_bytes": 2262,
+    "input_mapping_size_bytes": 2278,
     "input_tsv_size_bytes": 1233012928,
     "output_dir": "run_output/60820188475559.filtered.snp_out",
-    "output_dir_size_bytes": 10900636856,
+    "output_dir_size_bytes": 2991755325,
     "output_triples": {
-  "run_output/60820188475559.filtered.snp_out/1.nq": 8167677,
-  "run_output/60820188475559.filtered.snp_out/2.nq": 8182720,
-  "run_output/60820188475559.filtered.snp_out/3.nq": 8200381,
-  "run_output/60820188475559.filtered.snp_out/4.nq": 8136940,
-  "run_output/60820188475559.filtered.snp_out/5.nq": 8168321,
-  "run_output/60820188475559.filtered.snp_out/6.nq": 8131557,
-  "TOTAL": 48987596
+  "run_output/60820188475559.filtered.snp_out/1.nq": 4498809,
+  "run_output/60820188475559.filtered.snp_out/2.nq": 4513327,
+  "run_output/60820188475559.filtered.snp_out/3.nq": 4482380,
+  "run_output/60820188475559.filtered.snp_out/4.nq": 4500062,
+  "run_output/60820188475559.filtered.snp_out/5.nq": 4502358,
+  "run_output/60820188475559.filtered.snp_out/6.nq": 4500804,
+  "TOTAL": 26997740
 },
     "combined_nq_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq",
-    "combined_nq_size_bytes": 5450318428,
+    "combined_nq_size_bytes": 2991755325,
     "gzip_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.nq.gz",
-    "gzip_size_bytes": 246717935,
+    "gzip_size_bytes": 134913420,
+    "brotli_path": "",
+    "brotli_size_bytes": 0,
     "hdt_path": "run_output/60820188475559.filtered.snp_out/60820188475559.filtered.snp.hdt",
-    "hdt_size_bytes": 283178871
+    "hdt_size_bytes": 154027686
   },
   "java": {
     "version_header": "openjdk version \"11.0.28\" 2025-07-15"
