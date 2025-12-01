@@ -93,7 +93,7 @@ def make_plots(df: pd.DataFrame):
 
     # ---- 1) Sizes per format ----
     size_cols = ["input_vcf_MB", "nq_MB", "gzip_MB", "hdt_MB", "brotli_MB"]
-    size_labels = ["VCF", "N-Quads", "NQ (gz)", "HDT", "Brotli"]
+    size_labels = ["VCF", "N-Quads", "Gzip", "HDT", "Brotli"]
 
     width = 0.18
     offsets = [i * width - (1.5 * width) for i in range(len(size_cols))]
