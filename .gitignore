@@ -11,11 +11,13 @@ kafka_2*/
 !*_example.properties
 !docker/configuration.properties
 scripts/node_modules
+.vscode/
 
 !time-*
 
 run_output/
 vcf_files/
+fixed_vcf_files/
 *.vcf
 *.tsv
 RMLStreamer-v2.5.0-standalone.jar
